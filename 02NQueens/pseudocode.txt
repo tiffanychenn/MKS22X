@@ -1,18 +1,19 @@
 solveH(int column)
+	if (column >= size)
+		return true
 	int[] placesToPutQueen = new int[size]
 	int counter = 0
 	for loop:
 		int whatIsHere = board[i][column]
 		if (whatIsHere < 0)
 			removeQueen()
-			placesToPutQueen = removeDangerSpots() // this will return placesToPutQueen
+			placesToPutQueen = removeDangerSpots() // this will return a new placesToPutQueen based on what spots were removed
 			continue
 		else if (whatIsHere == 0)
 			int[counter] = i
 			counter ++
 	if (placesToPutQueen still has stuff in it)
-		random spot on chessboard = randomized number * length of nums
 		addQueen()
 		addDangerSpots()
-		return true
-	return false
+		return solveH(column + 1)
+	return solveH(column - 1)
