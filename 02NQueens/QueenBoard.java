@@ -4,6 +4,7 @@ public class QueenBoard{
     
     public QueenBoard(int size){
 	    board = new int[size][size];
+        solutionCount = -1;
     }
 
     /**
@@ -15,24 +16,27 @@ public class QueenBoard{
      *final configuration of the board after adding 
      *all n queens. Uses solveH
      */
-    public boolean solve(){
-	    return solveH(0);
+    public void solve(){
+        if (board.length < 4){
+            return;
+        }
+        solutionCount = 0;
+	    solveH(0);
     }
 
     private boolean solveH(int col){
-	    if (col >= board.length){
+        if (col >= board.length){
             return true;
         }
         int num = -1;
         for (int row = 0; row < board.length; row ++){
-            int what = board[row][col];
-            if (what < 0){
-                num = removeDangerSpots(row, col);
-                continue;
+            if (board[row][col] < 0){
+                num = removeQueen(row, col);
+                break;
             }
-            else if (what == 0){
-                num = i;
-                continue;
+            else if (board[row][col] == 0){
+                num = row;
+                break;
             }
         }
         if (num >= 0){
@@ -53,17 +57,29 @@ public class QueenBoard{
         int counter = 0;
         while (r - counter >= 0 && c - counter >= 0){
             board[r - counter][c - counter] --;
-            counter --;
+            counter ++;
         }
         counter = 0;
         while (r + counter < board.length && c + counter < board.length){
             board[r + counter][c + counter] --;
-            counter --;
+            counter ++;
         }
+        counter = 0;
+        while (r - counter >= 0 && c + counter < board.length){
+            board[r - counter][c + counter] --;
+            counter ++;
+        }
+        counter = 0;
+        while (r + counter < board.length && c - counter >= 0){
+            board[r + counter][c - counter] --;
+            counter ++;
+        }
+        board[r][c] = 0;
         int returned = -1;
         for (int i = 0; i < board.length; i ++){
-            if (board[i][c] == 0 && i != r){
+            if (board[i][c] == 0 && i > r){
                 returned = i;
+                break;
             }
         }
         return returned;
@@ -84,6 +100,16 @@ public class QueenBoard{
             board[r + counter][c + counter] ++;
             counter ++;
         }
+        counter = 0;
+        while (r - counter >= 0 && c + counter < board.length){
+            board[r - counter][c + counter] ++;
+            counter ++;
+        }
+        counter = 0;
+        while (r + counter < board.length && c - counter >= 0){
+            board[r + counter][c - counter] ++;
+            counter ++;
+        }
         board[r][c] = -1;
     }
 
@@ -92,16 +118,21 @@ public class QueenBoard{
      *The board should be reset after this is run.    
      */
     public int getSolutionCount(){
-        for (int i = 0; i < board.length; i ++){
-            for (int j = 0; j < board.length; j ++){
-                board[i][j] = 0;
-            }
+        if (solutionCount < 0){
+            return -1;
         }
-    	return -1;
+        countSolutions();
+        board = new int[board.length][board.length];
+    	return solutionCount;
     }
 
-    public boolean countSolutions(){
-        return getSolutionCount() > 0;
+    public void countSolutions(){
+        boolean hello = true;
+        while (hello){
+            hello = solveH(board.length - 1);
+            System.out.println(debugger());
+            solutionCount ++;
+        }
     }
 
     /**toString
@@ -118,6 +149,17 @@ public class QueenBoard{
                 else{
                     returned += "_ ";
                 }
+            }
+            returned += "\n";
+        }
+        return returned;
+    }
+
+    private String debugger(){
+        String returned = "";
+        for (int i = 0; i < board.length; i ++){
+            for (int j = 0; j < board.length; j ++){
+                returned = returned + board[i][j] + " ";
             }
             returned += "\n";
         }
