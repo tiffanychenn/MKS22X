@@ -3,7 +3,7 @@ public class QueenBoard{
     private int solutionCount;
     
     public QueenBoard(int size){
-	board = new int[size][size];
+	    board = new int[size][size];
         solutionCount = -1;
     }
 
@@ -17,7 +17,7 @@ public class QueenBoard{
      *all n queens. Uses solveH
      */
     public void solve(){
-	solveH(0);
+	    solveH(0);
     }
 
     private boolean solveH(int col){
@@ -118,18 +118,18 @@ public class QueenBoard{
     }
 
     public void countSolutions(){
-	if (board.length == 2 || board.length == 3){
-	    solutionCount = -1;
-	}
-	else {
-	    solve();
-	    solutionCount ++;
-	    boolean hello = true;
-	    while (hello){
-		hello = solveH(board.length - 1);
-		solutionCount ++;
-	    }
-	}
+    	if (board.length == 2 || board.length == 3){
+    	    solutionCount = 0;
+    	}
+    	else {
+    	    solve();
+    	    solutionCount ++;
+    	    boolean hello = true;
+    	    while (hello){
+        		hello = solveH(board.length - 1);
+        		solutionCount ++;
+            }
+        }
     }
 
     /**toString
