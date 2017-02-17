@@ -2,11 +2,14 @@ public class KnightBoard{
 
     //variables
     private int[][] board;
+    private int[][] numMoves;
     private static final int[] rows = {1, 1, 2, 2, -1, -1, -2, -2};
     private static final int[] cols = {2, -2, 1, -1, 2, -2, 1, -1};
 
     public KnightBoard(int startingRows,int startingCols){
         board = new int[startingRows][startingCols];
+        numMoves = new int[startingRows][startingCols];
+        fillNums();
     }
 
     //blank if you never called solve or when there is no solution
@@ -33,6 +36,10 @@ public class KnightBoard{
         solveH(0, 0, 1);
     }
 
+    public void solveImprove(){
+        solveImprove(0, 0, 1);
+    }
+
     // level is the # of the knight
     private boolean solveH(int row, int col, int level){
         if (level > board.length * board[0].length){
@@ -51,6 +58,37 @@ public class KnightBoard{
             board[row][col] = 0;
         }
         return false;
+    }
+
+    private boolean solveImprove(int row, int col, int level){
+        if (level > board.length * board[0].length){
+            return true;
+        }
+        ArrayList<Integer> ints = new ArrayList<Integer>();
+        int counter = 0;
+        for (int i = 0; i < 8; i ++){
+            if (row + rows[i] < 0 || col + cols[i] < 0 || row + rows[i] >= numMoves.length || col + cols[i] >= numMoves[0].length){
+                continue;
+            }
+            if (numMoves[row + rows[i]][col + cols[i]] > 0){
+                ints[counter] = i;
+                counter ++
+            }
+        }
+    }
+
+    private void fillNums(){
+        for (int row = 0; row < numMoves.length; row ++){
+            for (int col = 0; col < numMoves[0].length; col ++){
+                int counter = 0;
+                for (int i = 0; i < 8; i ++){
+                    if (!(row + rows[i] < 0 || col + cols[i] < 0 || row + rows[i] >= numMoves.length || col + cols[i] >= numMoves[0].length)){
+                        counter ++;
+                    }
+                }
+                numMoves[row][col] = counter;
+            }
+        }
     }
 
 }
