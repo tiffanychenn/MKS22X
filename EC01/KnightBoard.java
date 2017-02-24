@@ -31,7 +31,7 @@ public class KnightBoard{
     //blank if you never called solve or when there is no solution
     public String toString(){
         String s = "";
-        if (board[0][0] != 0){
+        if (!(board.length == 0 || board[0].length == 0) && board[0][0] != 0){
             for (int i = 0; i < board.length; i ++){
                 for (int j = 0; j < board[0].length; j ++){
                     if (board[i][j] < 10){
@@ -55,10 +55,16 @@ public class KnightBoard{
     }
 
     public void solve(){
+        if (board.length == 0 || board[0].length == 0){
+            return;
+        }
         solveH(0, 0, 1);
     }
 
     public void solveFast(){
+        if (board.length == 0 || board[0].length == 0){
+            return;
+        }
         solveFastH(0, 0, 1);
     }
 
@@ -86,6 +92,9 @@ public class KnightBoard{
         if (level == board.length * board[0].length){
             board[row][col] = level;
             return true;
+        }
+        if (row >= board.length || col >= board[0].length){
+            return false;
         }
         int[] ints = new int[8];
         ints[0] = 8;
