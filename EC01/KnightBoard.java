@@ -96,19 +96,19 @@ public class KnightBoard{
         if (row >= board.length || col >= board[0].length){
             return false;
         }
-        int[] ints = new int[8];
-        ints[0] = 8;
-        int counter = 0;
+        ArrayList<Moves> moves = new ArrayList<Moves>();
         for (int i = 0; i < 8; i ++){
-            if (row + rows[i] < 0 || col + cols[i] < 0 || row + rows[i] >= board.length || col + cols[i] >= board[0].length){
-                continue;
-            }
-            if (numMoves[row + rows[i]][col + cols[i]] > 0){
-                ints[counter] = i;
-                counter ++;
+            if (!(row + rows[i] < 0 || col + cols[i] < 0 || row + rows[i] >= numMoves.length || col + cols[i] >= numMoves[0].length) && numMoves[row + rows[i]][col + cols[i]] > 0){
+                Moves movie = new Moves(rows[i], cols[i], numMoves[row + rows[i]][col + cols[i]]);
+                int counter = 0;
+                for (int j = 0; j < moves.size(); j ++){
+                    if (moves.get(j).getMoves() < movie.getMoves()){
+                        counter ++;
+                    }
+                }
+                moves.add(counter, movie);
             }
         }
-        ints = order(ints, row, col);
         int placeholder = numMoves[row][col];
         board[row][col] = level;
         numMoves[row][col] = 0;
@@ -117,8 +117,8 @@ public class KnightBoard{
                 numMoves[row + rows[j]][col + cols[j]] --;
             }
         }
-        for (int i = 0; i < ints.length; i ++){
-            if (solveFastH(row + rows[ints[i]], col + cols[ints[i]], level + 1)){
+        for (int i = 0; i < moves.size(); i ++){
+            if (solveFastH(row + moves.get(i).getRow(), col + moves.get(i).getCol(), level + 1)){
                 return true;
             }
         }
@@ -130,33 +130,6 @@ public class KnightBoard{
             }
         }
         return false;
-    }
-
-    private int[] order(int[] values, int row, int col){
-        if (values[0] == 8){
-            return new int[0];
-        }
-        int counter = 1;
-        for (int i = 1; i < values.length; i ++){
-            if (values[i] == 0){
-                break;
-            }
-            counter ++;
-        }
-        int[] returned = new int[counter];
-        for (int i = 0; i < returned.length; i ++){
-            counter = 0;
-            for (int j = 0; j < returned.length; j ++){
-                if (i != j && numMoves[row + rows[values[i]]][col + cols[values[i]]] > numMoves[row + rows[values[j]]][col + cols[values[j]]]){
-                    counter ++;
-                }
-            }
-            while (numMoves[row + rows[values[i]]][col + cols[values[i]]] == returned[counter] && returned[counter] != 0){
-                counter ++;
-            }
-            returned[counter] = values[i];
-        }
-        return returned;
     }
 
 }

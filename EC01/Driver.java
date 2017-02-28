@@ -1,9 +1,11 @@
 public class Driver{
 
     public static void main(String[] args){
-    		KnightBoard k = new KnightBoard(43, 43);
+    	for (int i = 40; i < 61; i ++){
+    		KnightBoard k = new KnightBoard(i, i);
     		k.solveFast();
-    		System.out.println(k);
+    		System.out.println(i); System.out.println(k);
+    	}
     }
 
 }
