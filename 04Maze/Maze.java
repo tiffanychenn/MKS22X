@@ -23,6 +23,16 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
     }
+    
+
+    private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
+
 
     public void setAnimate(boolean b){
 
@@ -83,5 +93,3 @@ public class Maze{
 
 
 }
-
-
