@@ -3,8 +3,7 @@ import java.io.*;
 
 public class Maze{
 
-
-    private char[][]maze;
+    private char[][] maze;
     private boolean animate;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
@@ -21,35 +20,44 @@ public class Maze{
     */
 
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+        readFile(filename);
+	animate = false;
+    }
+
+    private void readFile(String file){
+	try {
+	    Scanner sc = new Scanner(new File(file));
+	    sc.useDelimiter("\n");
+	    int counter = 0;
+	    while (sc.hasNext()){
+		char[] ary = new char[sc.next().length()];
+	        for (int i = 0; i < sc.next().length(); i ++){
+		    ary[i] = sc.next.charAt(i);
+		}
+		counter ++;
+	    }
+	}
+	catch (Exception e){
+	    System.out.println("ugh");
+	}
     }
     
-
     private void wait(int millis){ //ADDED SORRY!
-         try {
-             Thread.sleep(millis);
-         }
-         catch (InterruptedException e) {
-         }
-     }
-
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
 
     public void setAnimate(boolean b){
-
         animate = b;
-
     }
-
 
     public void clearTerminal(){
-
         //erase terminal, go to top left of screen.
-
         System.out.println("\033[2J\033[1;1H");
-
     }
-
-
 
     /*Wrapper Solve Function
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
