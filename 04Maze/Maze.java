@@ -132,20 +132,21 @@ public class Maze{
             maze[row][col] = '.';
             if (maze[row + 1][col] == '@'){
                 maze[row + 1][col] = ' ';
-                solve(row + 1, col);
+                return solve(row + 1, col);
             }
             else if (maze[row - 1][col] == '@'){
                 maze[row - 1][col] = ' ';
-                solve(row - 1, col);
+                return solve(row - 1, col);
             }
             else if (maze[row][col + 1] == '@'){
                 maze[row][col + 1] = ' ';
-                solve(row, col + 1);
+                return solve(row, col + 1);
             }
             else if (maze[row][col - 1] == '@'){
                 maze[row][col - 1] = ' ';
-                solve(row, col - 1);
+                return solve(row, col - 1);
             }
+            return false;
         }
         return true;
     }
