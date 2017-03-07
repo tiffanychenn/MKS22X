@@ -1,10 +1,11 @@
 public class USACO{
 
-	public static void main(String[] args){
-		String fileName = args[0];
+	public USACO(){}
+
+	public int bronze(String fileName){
 		Bronze b = new Bronze(fileName);
 		b.makeLake();
-		System.out.println(b.volume());
+		return b.volume();
 	}
 
 }
