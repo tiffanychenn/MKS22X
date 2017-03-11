@@ -8,14 +8,25 @@ public class Quiz2Redux{
      */
 
     public static ArrayList<String> combinations(String s){
-        ArrayList<String>words = new ArrayList<String>();
-        help( words , /*fill this in with more */);
+        ArrayList<String> words = new ArrayList<String>();
+        help(s, words, 0, "");
+        words.add("");
         Collections.sort(words);
         return words;
     }
   
-    private static void help( ArrayList<String> words, 
-                             /*fill this in with more arguments*/ ){
-        /*METHOD TO BE WRITTEN BY YOU.*/ 
+    private static void help(String s, ArrayList<String> words, int index, String current){
+        if (index >= s.length()){
+            return;
+        }
+        help(s, words, index + 1, current + s.substring(index, index + 1));
+        help(s, words, index + 1, current);
+        words.add(current + s.substring(index, index + 1));
+    }
+
+    public static void main(String[] args){
+        System.out.println(combinations("bags"));
+        System.out.println(combinations("abcd"));
+        System.out.println(combinations("kji"));
     }
 }
