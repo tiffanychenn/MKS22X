@@ -8,4 +8,9 @@ public class USACO{
 		return b.volume();
 	}
 
+	public int silver(String fileName){
+		Silver s = new Silver(fileName);
+		return s.mooves();
+	}
+
 }
