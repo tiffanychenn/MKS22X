@@ -8,7 +8,7 @@ public class Quick{
         ary[j] = tempy;
     }
 
-    public static int part(int[] ary, int start, int end){
+    /*public static int part(int[] ary, int start, int end){
         Random rand = new Random();
         int r = rand.nextInt(end - start) + start;
         if (r == end) r --;
@@ -27,7 +27,7 @@ public class Quick{
         }
         swap(ary, end, counterS);
         return counterS;
-    }
+    }*/
 
     public static int quickselect(int[] data, int k){
         return quickselectH(data, k, 0, data.length - 1);
@@ -35,10 +35,34 @@ public class Quick{
 
     private static int quickselectH(int[] data, int k, int start, int end){
         if (end <= start) return data[end];
-        int pivot = part(data, start, end);
-        if (pivot == k) return data[pivot];
-        else if (pivot > k) return quickselectH(data, k, 0, pivot - 1);
-        else return quickselectH(data, k, pivot + 1, data.length - 1);
+        Random rand = new Random();
+        int r = rand.nextInt(end - start) + start;
+        if (r == start) r ++;
+        int v = data[r];
+        swap(data, start, r);
+        int i = start;
+        int lt = start + 1;
+        int gt = end;
+        while (i <= gt){
+            if (data[i] == v){
+                i ++;
+            }
+            else if (data[i] > v){
+                swap(data, i, gt);
+                gt --;
+            }
+            else {
+                swap(data, lt, i);
+                lt ++; i ++;
+            }
+        }
+        if (k < lt){
+            return quickselectH(data, k, start, lt - 1);
+        }
+        else if (k > gt){
+            return quickselectH(data, k, gt + 1, end);
+        }
+        else return data[k];
     }
 
     public static void quicksort(int[] data){
@@ -74,12 +98,18 @@ public class Quick{
     }
 
     public static void main(String[] args){
-        int[] ary = {5, 10, 0, 15, 2};
-        System.out.println(quickselect(ary, 0)); //would return 0
-        System.out.println(quickselect(ary, 1)); //would return 2
-        System.out.println(quickselect(ary, 2)); //would return 5
-        System.out.println(quickselect(ary, 3)); //would return 10
-        System.out.println(quickselect(ary, 4)); //would return 15
+        int[] ary = new int[1000000];
+        for (int i = 0; i < ary.length; i ++){
+            ary[i] = 2389;
+        }
+        System.out.println("I'm here!");
+        quicksort(ary);
+        System.out.println("done");
+        System.out.println(quickselect(ary, 621873)); //would return 0
+        System.out.println(quickselect(ary, 367187)); //would return 2
+        System.out.println(quickselect(ary, 218)); //would return 5
+        System.out.println(quickselect(ary, 33175)); //would return 10
+        System.out.println(quickselect(ary, 4316)); //would return 15
     }
 
     public static String toString(int[] ary){
