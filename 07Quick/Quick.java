@@ -79,16 +79,16 @@ public class Quick{
     public static void main(String[] args){
         int[] ary = new int[1000000];
         for (int i = 0; i < ary.length; i ++){
-            ary[i] = 2389;
+            ary[i] = i;
         }
         System.out.println("I'm here!");
         quicksort(ary);
         System.out.println("done");
-        System.out.println(quickselect(ary, 621873)); //would return 0
+        /*System.out.println(quickselect(ary, 621873)); //would return 0
         System.out.println(quickselect(ary, 367187)); //would return 2
         System.out.println(quickselect(ary, 218)); //would return 5
         System.out.println(quickselect(ary, 33175)); //would return 10
-        System.out.println(quickselect(ary, 4316)); //would return 15
+        System.out.println(quickselect(ary, 4316)); //would return 15*/
     }
 
     private static String toString(int[] ary){
