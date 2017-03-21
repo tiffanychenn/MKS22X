@@ -77,18 +77,19 @@ public class Quick{
     }
 
     public static void main(String[] args){
-        int[] ary = new int[1000000];
+        int[] ary = new int[100];
         for (int i = 0; i < ary.length; i ++){
-            ary[i] = i;
+            ary[i] = 3;
         }
-        System.out.println("I'm here!");
+        ary[0] = 9;
+        System.out.println(toString(ary));
         quicksort(ary);
-        System.out.println("done");
-        /*System.out.println(quickselect(ary, 621873)); //would return 0
-        System.out.println(quickselect(ary, 367187)); //would return 2
-        System.out.println(quickselect(ary, 218)); //would return 5
-        System.out.println(quickselect(ary, 33175)); //would return 10
-        System.out.println(quickselect(ary, 4316)); //would return 15*/
+        System.out.println(toString(ary));
+        /*System.out.println(quickselect(ary, 621873));
+        System.out.println(quickselect(ary, 367187));
+        System.out.println(quickselect(ary, 218)); 
+        System.out.println(quickselect(ary, 33175)); 
+        System.out.println(quickselect(ary, 4316));*/
     }
 
     private static String toString(int[] ary){
