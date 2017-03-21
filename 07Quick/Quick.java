@@ -8,27 +8,6 @@ public class Quick{
         ary[j] = tempy;
     }
 
-    /*public static int part(int[] ary, int start, int end){
-        Random rand = new Random();
-        int r = rand.nextInt(end - start) + start;
-        if (r == end) r --;
-        int compare = ary[r];
-        int counterS = start;
-        int counterE = end - 1;
-        swap(ary, end, r);
-        while (counterS <= counterE){
-            if (ary[counterS] < compare){
-                counterS ++;
-            }
-            else {
-                swap(ary, counterS, counterE);
-                counterE --;
-            }
-        }
-        swap(ary, end, counterS);
-        return counterS;
-    }*/
-
     public static int quickselect(int[] data, int k){
         return quickselectH(data, k, 0, data.length - 1);
     }
@@ -112,7 +91,7 @@ public class Quick{
         System.out.println(quickselect(ary, 4316)); //would return 15
     }
 
-    public static String toString(int[] ary){
+    private static String toString(int[] ary){
         String s = "[";
         for (int i = 0; i < ary.length; i ++){
             s = s + " " + ary[i];
