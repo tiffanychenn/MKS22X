@@ -12,8 +12,7 @@ public class Merge{
         }
         int[] a = mergeH(ary, start, (start + end) / 2);
         int[] b = mergeH(ary, (start + end) / 2 + 1, end);
-        int[] temp = new int[a.length + b.length];
-        copy(temp, sort(a, b));
+        int[] temp = sort(a, b);
         return temp;
     }
 

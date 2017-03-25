@@ -77,19 +77,15 @@ public class Quick{
     }
 
     public static void main(String[] args){
-        int[] ary = new int[100];
+        int[] ary = new int[1000000];
         for (int i = 0; i < ary.length; i ++){
-            ary[i] = 3;
+            ary[i] = 1000000 - i;
         }
-        ary[0] = 9;
-        System.out.println(toString(ary));
-        quicksort(ary);
-        System.out.println(toString(ary));
-        /*System.out.println(quickselect(ary, 621873));
+        System.out.println(quickselect(ary, 621873));
         System.out.println(quickselect(ary, 367187));
         System.out.println(quickselect(ary, 218)); 
         System.out.println(quickselect(ary, 33175)); 
-        System.out.println(quickselect(ary, 4316));*/
+        System.out.println(quickselect(ary, 4316));
     }
 
     private static String toString(int[] ary){
