@@ -1,20 +1,20 @@
 public class MyLinkedList{
 
-    public class Node{
+    private class Node{
 
         private int element;
         private Node next;
 
-        public Node(int e){
+        private Node(int e){
             element = e;
         }
 
-        public Node(int e, Node n){
+        private Node(int e, Node n){
             element = e;
             next = n;
         }
 
-        public void changeRef(Node neww){
+        private void changeRef(Node neww){
             next = neww;
         }
 
