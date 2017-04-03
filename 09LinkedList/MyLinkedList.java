@@ -19,10 +19,7 @@ public class MyLinkedList{
     private Node start;
     private int size;
 
-    public MyLinkedList(){
-        start = null;
-        size = 0;
-    }
+    public MyLinkedList(){}
 
     public boolean add(int e){
         if (size == 0){
@@ -104,6 +101,20 @@ public class MyLinkedList{
             counter ++;
         }
         return counter;
+    }
+
+    public int remove(int index){
+        if (index >= size) throw new IndexOutOfBoundsException();
+        int counter = 0;
+        Node current = start;
+        while (counter < index - 1){
+            current = current.next;
+            counter ++;
+        }
+        Node now = current.next.next;
+        current.next = now;
+        size --;
+        return index;
     }
 
 }

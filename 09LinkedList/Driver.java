@@ -10,6 +10,10 @@ public class Driver{
 		System.out.println(l);
 		l.add(2, 19);
 		System.out.println(l);
+		l.remove(2);
+		System.out.println(l);
+		l.remove(1);
+		System.out.println(l);
 	}
 
 }
