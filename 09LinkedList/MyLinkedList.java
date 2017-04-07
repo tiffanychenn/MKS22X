@@ -1,6 +1,30 @@
 import java.util.*;
 
-public class MyLinkedList{
+public class MyLinkedList implements Iterable<Integer>{
+
+    private class MyLinkedListIterator implements Iterator<Integer>{
+
+        private int index;
+        private MyLinkedList stuff;
+
+        private MyLinkedListIterator(MyLinkedList a){
+            index = 0;
+            stuff = a;
+        }
+
+        public boolean hasNext(){
+            return index < stuff.size();
+        }
+
+        public Integer next(){
+            int returned = stuff.get(index);
+            index ++;
+            return returned;
+        }
+
+        public void remove(){}
+
+    }
 
     private class Node{
 
@@ -29,6 +53,10 @@ public class MyLinkedList{
     int size;
 
     public MyLinkedList(){}
+
+    public Iterator<Integer> iterator(){
+        return new MyLinkedListIterator(this);
+    }
 
     public int size(){
         return size;

@@ -9,13 +9,13 @@ public class Driver{
 		l.add(3);
 		l.add(486);
 		l.add(1, 36817);
-		System.out.println(l);
 		l.add(2, 19);
-		System.out.println(l);
 		l.add(0, 5);
-		System.out.println(l);
 		l.add(l.size() - 1, 1368798);
 		System.out.println(l);
+		for (int i : l){
+			System.out.println(i);
+		}
 	}
 
 }
