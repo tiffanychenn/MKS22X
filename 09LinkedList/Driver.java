@@ -53,7 +53,9 @@ public class Driver{
 	for(Integer s : data){
 	    System.out.print(s+" ");
 	}
+	System.out.println();
 	//should be same
+
     }
 
 }

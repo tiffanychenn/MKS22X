@@ -22,8 +22,6 @@ public class MyLinkedList implements Iterable<Integer>{
             return returned;
         }
 
-        public void remove(){}
-
     }
 
     private class Node{
@@ -84,12 +82,6 @@ public class MyLinkedList implements Iterable<Integer>{
         return current;
     }
 
-    private void remove(Node target){
-        target.prev.next = target.next;
-        target.next.prev = target.prev;
-        size --;
-    }
-
     public String toString(){
         String s = "[";
         Node current = start;
@@ -123,11 +115,13 @@ public class MyLinkedList implements Iterable<Integer>{
 
     public int get(int index){
         Node n = getNthNode(index);
+        if (index == size) throw new IndexOutOfBoundsException();
         return n.value;
     }
     
     public int set(int index, int value){
         Node n = getNthNode(index);
+        if (index == size) throw new IndexOutOfBoundsException();
         int v = n.value;
         n.value = value;
         return v;
@@ -146,6 +140,7 @@ public class MyLinkedList implements Iterable<Integer>{
 
     public int remove(int index){
         Node n = getNthNode(index);
+        if (index == size) throw new IndexOutOfBoundsException();
         if (size == 1){
             start = null;
             size --;
