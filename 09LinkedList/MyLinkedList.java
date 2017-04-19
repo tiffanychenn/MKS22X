@@ -2,12 +2,12 @@ import java.util.*;
 
 public class MyLinkedList implements Iterable<Integer>{
 
-    private class MyLinkedListIterator implements Iterator<Integer>{
+    public static class MyLinkedListIterator implements Iterator<Integer>{
 
         private int index;
         private MyLinkedList stuff;
 
-        private MyLinkedListIterator(MyLinkedList a){
+        public MyLinkedListIterator(MyLinkedList a){
             index = 0;
             stuff = a;
         }
@@ -63,7 +63,7 @@ public class MyLinkedList implements Iterable<Integer>{
     }
 
     private Node getNthNode(int n){
-        if (n >= size) throw new IndexOutOfBoundsException();
+        if (n > size) throw new IndexOutOfBoundsException();
         Node current;
         if (n > size / 2){
             int counter = size - n;
@@ -146,6 +146,11 @@ public class MyLinkedList implements Iterable<Integer>{
 
     public int remove(int index){
         Node n = getNthNode(index);
+        if (size == 1){
+            start = null;
+            size --;
+            return n.value;
+        }
         if (index == 0){
             n.next.prev = null;
             start = n.next;
@@ -164,6 +169,7 @@ public class MyLinkedList implements Iterable<Integer>{
 
     public void add(int index, int value){
         Node n = getNthNode(index);
+        size ++;
         Node p = new Node(value);
         if (index == 0){
             start = p;
@@ -181,7 +187,6 @@ public class MyLinkedList implements Iterable<Integer>{
             n.prev.next = p;
             n.prev = p;
         }
-        size ++;
     }
 
 }
