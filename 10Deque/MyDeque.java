@@ -69,4 +69,8 @@ public class MyDeque{
         return data.get(end);
     }
 
+    public String toString(){
+        return data.toString();
+    }
+
 }
