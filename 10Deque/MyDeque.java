@@ -2,75 +2,86 @@ import java.util.*;
 
 public class MyDeque{
 
-    private ArrayList<String> data;
+    private String[] data;
     private int start, end, size;
 
     public MyDeque(){
-        data = new ArrayList<String>(10);
-        size = 10;
+        data = new String[10];
     }
 
     private void resize(){
-        ArrayList<String> temp = new ArrayList<String>(size * 2);
+        String[] temp = new String[data.length * 2];
         size *= 2;
         int counter = start;
+        int place = 0;
         while (counter != end){
-            temp.add(data.get(counter));
+            temp[place] = data[counter];
             counter ++;
-            counter = counter % data.size();
+            place ++;
+            counter = counter % data.length;
         }
-        temp.add(data.get(end));
+        temp[place] = data[end];
         start = 0;
-        end = size - 1;
+        end = place;
         data = temp;
     }
 
     public void addFirst(String s){
-        if ((end + 1) % size == start) resize();
-        data.add((start - 1) % size, s);
+        if ((end + 1) % data.length == start) resize();
+        data[(start - 1 + data.length) % data.length] = s;
         start --;
-        start = start % size;
-        if (data.size() == 1){
+        size ++;
+        start = (start + data.length) % data.length;
+        if (size == 1){
             end --;
-            end = end % size;
+            end = end % data.length;
         }
     }
 
     public void addLast(String s){
-        if ((end + 1) % size == start) resize();
-        data.add((end + 1) % size, s);
+        if ((end + 1) % data.length == start) resize();
+        data[(end + 1) % data.length] = s;
         end ++;
-        end = end % size;
-        if (data.size() == 1){
+        size ++;
+        end = end % data.length;
+        if (size == 1){
             start ++;
-            start = start % size;
+            start = (start + data.length) % data.length;
         }
     }
 
     public String removeFirst(){
-        String s = data.get(start);
+        String s = data[start];
         start ++;
-        start = start % size;
+        start = start % data.length;
+        size --;
         return s;
     }
 
     public String removeLast(){
-        String s = data.get(end);
+        String s = data[end];
         end --;
-        end = end % size;
+        end = end % data.length;
+        size --;
         return s;
     }
 
     public String getFirst(){
-        return data.get(start);
+        return data[start];
     }
 
     public String getLast(){
-        return data.get(end);
+        return data[end];
     }
 
     public String toString(){
-        return data.toString();
+        String s = "";
+        for (int i = 0; i < data.length; i ++){
+            if (data[i] == null) s += "null ";
+            else s += data[i].toString() + " ";
+        }
+        s += "\n" + "start: " + start + " end: " + end;
+        return s;
     }
 
 }
