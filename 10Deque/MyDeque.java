@@ -11,7 +11,6 @@ public class MyDeque{
 
     private void resize(){
         String[] temp = new String[data.length * 2];
-        size *= 2;
         int counter = start;
         int place = 0;
         while (counter != end){
@@ -51,6 +50,7 @@ public class MyDeque{
     }
 
     public String removeFirst(){
+        if (size == 0) throw new NoSuchElementException();
         String s = data[start];
         start ++;
         start = start % data.length;
@@ -59,6 +59,7 @@ public class MyDeque{
     }
 
     public String removeLast(){
+        if (size == 0) throw new NoSuchElementException();
         String s = data[end];
         end --;
         end = end % data.length;
@@ -67,10 +68,12 @@ public class MyDeque{
     }
 
     public String getFirst(){
+        if (size == 0) throw new NoSuchElementException();
         return data[start];
     }
 
     public String getLast(){
+        if (size == 0) throw new NoSuchElementException();
         return data[end];
     }
 

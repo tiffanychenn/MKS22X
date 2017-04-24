@@ -2,12 +2,12 @@ public class Driver{
 	
 	public static void main(String[] args){
 		MyDeque d = new MyDeque();
-		d.addFirst("hello");
+		d.addLast(null);
 		d.addLast("goodbye");
-		System.out.println(d.removeFirst());
+		System.out.println(d.removeLast());
 		d.addFirst("boop");
 		d.addFirst("angel");
-		System.out.println(d.removeLast());
+		System.out.println(d);
 		d.addLast("welp");
 		d.addLast("guess");
 		d.addLast("guy");
@@ -18,8 +18,8 @@ public class Driver{
 		d.addFirst("variety");
 		d.addFirst("done");
 		d.addLast("okay");
-		System.out.println(d.getFirst());
-		System.out.println(d.getLast());
+		System.out.println(d);
+		System.out.println(d);
 	}
 
 }
