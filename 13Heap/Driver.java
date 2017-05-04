@@ -9,6 +9,18 @@ public class Driver{
         h.add("unique");
         h.add("beagle");
         h.add("jolly");
+        h.add("ten");
+        h.add("bobby");
+        h.add("figure");
+        h.add("storytime");
+        h.add("zedd");
+        h.add("goodbye");
+        h.add("facetious");
+        h.add("guess");
+        h.add("boop");
+        System.out.println(h.peek());
+        System.out.println(h);
+        h.remove();
         System.out.println(h);
     }
 
