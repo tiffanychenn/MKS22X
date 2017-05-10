@@ -2,21 +2,25 @@ public class Driver{
     
     public static void main(String[] args){
         RunningMedian r = new RunningMedian();
+        r.add(12);
+        System.out.println(r.getMedian());
+        r.add(22);
+        System.out.println(r.getMedian());
+        r.add(116);
+        System.out.println(r.getMedian());
         r.add(5);
         System.out.println(r.getMedian());
-        r.add(10);
+        r.add(72);
         System.out.println(r.getMedian());
-        r.add(15);
+        r.add(4);
         System.out.println(r.getMedian());
-        r.add(8);
+        r.add(7);
         System.out.println(r.getMedian());
-        r.add(37);
-        r.add(379);
-        r.add(2);
-        r.add(1);
-        r.add(11);
+        r.add(721);
         System.out.println(r.getMedian());
-        r.add(18);
+        r.add(3);
+        System.out.println(r.getMedian());
+        r.add(31);
         System.out.println(r.getMedian());
     }
 

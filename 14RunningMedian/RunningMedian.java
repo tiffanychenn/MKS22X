@@ -32,16 +32,12 @@ public class RunningMedian{
             if (min.peek() > num){
                 min.add(num);
                 size1 ++;
-            }
-            else {
-                max.add(num);
-                size2 ++;
-            }
-            if (size1 > size2){
                 median1 = min.peek();
                 median2 = min.peek();
             }
             else {
+                max.add(num);
+                size2 ++;
                 median1 = max.peek();
                 median2 = max.peek();
             }
@@ -77,6 +73,7 @@ public class RunningMedian{
     }
 
     public double getMedian(){
+        System.out.println(min + ", " + max);
         return (median1 + median2) / 2.0;
     }
 

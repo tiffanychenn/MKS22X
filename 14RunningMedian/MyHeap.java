@@ -56,38 +56,51 @@ public class MyHeap{
         int index = 1;
         boolean welp = true;
         if (type){
-            while (index * 2 <= size && welp){
-                int left = heap.get(index).compareTo(heap.get(index * 2));
-                int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
+            while (index * 2 < size && welp){
+                int left = heap.get(index) - heap.get(index * 2);
+                int right = heap.get(index) - heap.get(index * 2 + 1);
                 if (left > 0 && right > 0) welp = false;
-                else if (left > right){
-                    Integer temp = heap.set(index, heap.get(index * 2 + 1));
-                    heap.set(index * 2 + 1, temp);
-                    index = index * 2 + 1;
+                else if (left < right){
+                    Integer temp = heap.set(index, heap.get(index * 2));
+                    heap.set(index * 2, temp);
+                    index = index * 2;
                 }
                 else {
+                    Integer temp = heap.set(index, heap.get(index * 2 + 1));
+                    heap.set(index * 2 + 1, temp); 
+                    index = index * 2 + 1;
+                }
+            }
+            if (index * 2 == size){
+                int left = heap.get(index) - heap.get(index * 2);
+                if (left < 0){
                     Integer temp = heap.set(index, heap.get(index * 2));
-                    heap.set(index * 2, temp); 
-                    index *= 2;
+                    heap.set(index * 2, temp);
                 }
             }
         }
         else {
             while (index * 2 < size && welp){
-                int left = heap.get(index).compareTo(heap.get(index * 2));
-                int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
+                int left = heap.get(index) - heap.get(index * 2);
+                int right = heap.get(index) - heap.get(index * 2 + 1);
                 if (left < 0 && right < 0) welp = false;
-                else if (left < right){
-                    Integer temp = heap.set(index, heap.get(index * 2 + 1));
-                    heap.set(index * 2 + 1, temp);
-                    index = index * 2 + 1;
+                else if (left > right){
+                    Integer temp = heap.set(index, heap.get(index * 2));
+                    heap.set(index * 2, temp);
+                    index = index * 2;
                 }
                 else {
-                    Integer temp = heap.set(index, heap.get(index * 2));
-                    heap.set(index * 2, temp); 
-                    index *= 2;
+                    Integer temp = heap.set(index, heap.get(index * 2 + 1));
+                    heap.set(index * 2 + 1, temp); 
+                    index = index * 2 + 1;
                 }
-
+            }
+            if (index * 2 == size){
+                int left = heap.get(index) - heap.get(index * 2);
+                if (left > 0){
+                    Integer temp = heap.set(index, heap.get(index * 2));
+                    heap.set(index * 2, temp);
+                }
             }
         }
     }
