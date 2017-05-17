@@ -1,9 +1,11 @@
+import java.util.*;
+
 public class QueueFrontier implements Frontier{
 
-	Queue<Location> frontier;
+	private LinkedList<Location> frontier;
 
 	public QueueFrontier(){
-		frontier = new Queue<Location>();
+		frontier = new LinkedList<Location>();
 	}
 
 	public void add(Location l){
@@ -12,6 +14,18 @@ public class QueueFrontier implements Frontier{
 
 	public Location next(){
 		return frontier.remove();
+	}
+
+	public Location peek(){
+		return frontier.peek();
+	}
+
+	public int size(){
+		return frontier.size();
+	}
+
+	public boolean hasNext(){
+		return !(frontier.peek() == null);
 	}
 
 }

@@ -4,6 +4,8 @@ public class Location implements Comparable<Location>{
 	Location prev;
 	boolean astar;
 
+	public Location(){}
+
 	public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar){
 		row = r;
 		col = c;
