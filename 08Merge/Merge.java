@@ -6,6 +6,7 @@ public class Merge{
     }
 
     private static int[] mergeH(int[] ary, int start, int end){
+	if (ary.length == 0) return ary;
         if (start == end) {
             int[] a = {ary[start]};
             return a;
