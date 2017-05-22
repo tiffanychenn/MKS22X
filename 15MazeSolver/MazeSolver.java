@@ -70,7 +70,6 @@ public class MazeSolver{
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
                 System.out.println(toString());
-                System.out.println(frontier.toString());
                 Location now = frontier.next();
                 ArrayList<Location> possible = possibilities(now);
                 for (int i = 0; i < possible.size(); i ++){
@@ -90,7 +89,6 @@ public class MazeSolver{
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
                 System.out.println(toString());
-                System.out.println(frontier.toString());
                 Location now = frontier.next();
                 ArrayList<Location> possible = possibilities(now);
                 for (int i = 0; i < possible.size(); i ++){
