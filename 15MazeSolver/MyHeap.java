@@ -24,7 +24,9 @@ public class MyHeap{
     }
 
     public Location remove(){
-        Location s = heap.set(1, heap.remove(size));
+        Location s;
+        if (size == 1) s = heap.remove(size);
+        else s = heap.set(1, heap.remove(size));
         size --;
         moveDown();
         return s;
@@ -60,7 +62,7 @@ public class MyHeap{
         int index = 1;
         boolean welp = true;
         if (type){
-            while (index * 2 <= size && welp){
+            while (index * 2 < size && welp){
                 int left = heap.get(index).compareTo(heap.get(index * 2));
                 int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
                 if (left > 0 && right > 0) welp = false;
@@ -77,7 +79,7 @@ public class MyHeap{
             }
         }
         else {
-            while (index * 2 <= size && welp){
+            while (index * 2 < size && welp){
                 int left = heap.get(index).compareTo(heap.get(index * 2));
                 int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
                 if (left < 0 && right < 0) welp = false;

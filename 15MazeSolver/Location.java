@@ -35,9 +35,18 @@ public class Location implements Comparable<Location>{
         astar = bool;
     }
 
+    public int getDist(){
+        return dstart;
+    }
+
     public int compareTo(Location other){
         if (astar) return (dstart + dgoal) - (other.dstart + other.dgoal);
         return dgoal - other.dgoal;
+    }
+
+    public String toString(){
+        if (astar) return dgoal + dstart + "";
+        return "" + dgoal;
     }
 
 }

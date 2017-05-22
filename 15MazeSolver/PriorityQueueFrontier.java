@@ -3,7 +3,7 @@ public class PriorityQueueFrontier implements Frontier{
     private MyHeap frontier;
 
     public PriorityQueueFrontier(){
-        frontier = new MyHeap();
+        frontier = new MyHeap(false);
     }
 
     public void add(Location l){
@@ -24,6 +24,10 @@ public class PriorityQueueFrontier implements Frontier{
 
     public boolean hasNext(){
         return !(frontier.peek() == null);
+    }
+
+    public String toString(){
+        return frontier.toString();
     }
 
 }
