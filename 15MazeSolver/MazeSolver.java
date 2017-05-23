@@ -25,9 +25,9 @@ public class MazeSolver{
             StackFrontier frontier = new StackFrontier();
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
-                System.out.println(toString());
+                if (pretty) System.out.println(toString());
                 Location now = frontier.next();
-                ArrayList<Location> possible = possibilities(now);
+                ArrayList<Location> possible = possibilities(now, 0);
                 for (int i = 0; i < possible.size(); i ++){
                     frontier.add(possible.get(i));
                 }
@@ -43,43 +43,37 @@ public class MazeSolver{
             QueueFrontier frontier = new QueueFrontier();
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
-                System.out.println(toString());
+                if (pretty) System.out.println(toString());
                 Location now = frontier.next();
-                ArrayList<Location> possible = possibilities(now);
+                ArrayList<Location> possible = possibilities(now, 1);
                 for (int i = 0; i < possible.size(); i ++){
                     frontier.add(possible.get(i));
                 }
-                if (possible.size() == 0){
-                    while (now != board.getStart() && countWalls(now) > 2){
-                        board.set(now.getRow(), now.getCol(), '.');
-                        now = now.getPrev();
-                    }
-                }
             }
-            while (frontier.size() > 0){
-                Location noww = frontier.next();
-                while (noww != board.getStart() && !(noww.getRow() == board.getEnd().getRow() && noww.getCol() == board.getEnd().getCol()) && countWalls(noww) > 2){
-                    board.set(noww.getRow(), noww.getCol(), '.');
+            if (frontier.size() > 0 && frontier.peek().getRow() == board.getEnd().getRow() && frontier.peek().getCol() == board.getEnd().getCol()){
+                Location noww = frontier.next().getPrev();
+                while (noww != board.getStart()){
+                    board.set(noww.getRow(), noww.getCol(), '@');
                     noww = noww.getPrev();
                 }
-                System.out.println();
             }
         }
         else if (style == 2){
             PriorityQueueFrontier frontier = new PriorityQueueFrontier();
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
-                System.out.println(toString());
+                if (pretty) System.out.println(toString());
                 Location now = frontier.next();
-                ArrayList<Location> possible = possibilities(now);
+                ArrayList<Location> possible = possibilities(now, 1);
                 for (int i = 0; i < possible.size(); i ++){
                     frontier.add(possible.get(i));
                 }
-                if (possible.size() == 0){
-                    while (now != board.getStart() && countWalls(now) > 2){
-                        board.set(now.getRow(), now.getCol(), '.');
-                        now = now.getPrev();
-                    }
+            }
+            if (frontier.size() > 0 && frontier.peek().getRow() == board.getEnd().getRow() && frontier.peek().getCol() == board.getEnd().getCol()){
+                Location noww = frontier.next().getPrev();
+                while (noww != board.getStart()){
+                    board.set(noww.getRow(), noww.getCol(), '@');
+                    noww = noww.getPrev();
                 }
             }
         }
@@ -88,17 +82,18 @@ public class MazeSolver{
             board.getStart().setBool(true);
             frontier.add(board.getStart());
             while (frontier.size() > 0 && (frontier.peek().getRow() != board.getEnd().getRow() || frontier.peek().getCol() != board.getEnd().getCol())){
-                System.out.println(toString());
+                if (pretty) System.out.println(toString());
                 Location now = frontier.next();
-                ArrayList<Location> possible = possibilities(now);
+                ArrayList<Location> possible = possibilities(now, 1);
                 for (int i = 0; i < possible.size(); i ++){
                     frontier.add(possible.get(i));
                 }
-                if (possible.size() == 0){
-                    while (now != board.getStart() && countWalls(now) > 2){
-                        board.set(now.getRow(), now.getCol(), '.');
-                        now = now.getPrev();
-                    }
+            }
+            if (frontier.size() > 0 && frontier.peek().getRow() == board.getEnd().getRow() && frontier.peek().getCol() == board.getEnd().getCol()){
+                Location noww = frontier.next().getPrev();
+                while (noww != board.getStart()){
+                    board.set(noww.getRow(), noww.getCol(), '@');
+                    noww = noww.getPrev();
                 }
             }
         }
@@ -115,8 +110,9 @@ public class MazeSolver{
 
     // helper function!!! -> returns a list of possible locations to go to
 
-    private ArrayList<Location> possibilities(Location l){
-        if (l != board.getStart()) board.set(l.getRow(), l.getCol(), '@');
+    private ArrayList<Location> possibilities(Location l, int style){
+        if (l != board.getStart() && style == 0) board.set(l.getRow(), l.getCol(), '@');
+        else if (l!= board.getStart()) board.set(l.getRow(), l.getCol(), '.');
         ArrayList<Location> temp = new ArrayList<Location>();
         if (board.get(l.getRow() + 1, l.getCol()) == ' ' || board.get(l.getRow() + 1, l.getCol()) == 'E'){
             temp.add(new Location(l.getRow() + 1, l.getCol(), l, l.getDist() + 1, distToEnd(l.getRow() + 1, l.getCol()), l.getBool()));
@@ -141,17 +137,6 @@ public class MazeSolver{
 
     private int distToEnd(int row, int col){
         return Math.abs(row - board.getEnd().getRow()) + Math.abs(col - board.getEnd().getCol());
-    }
-
-    // helper function!!! -> checks number of walls around a location
-
-    private int countWalls(Location l){
-        int temp = 0;
-        if (board.get(l.getRow() + 1, l.getCol()) == '#' || board.get(l.getRow() + 1, l.getCol()) == '.' || board.get(l.getRow() + 1, l.getCol()) == ' ') temp ++;
-        if (board.get(l.getRow() - 1, l.getCol()) == '#' || board.get(l.getRow() - 1, l.getCol()) == '.' || board.get(l.getRow() - 1, l.getCol()) == ' ') temp ++;
-        if (board.get(l.getRow(), l.getCol() + 1) == '#' || board.get(l.getRow(), l.getCol() + 1) == '.' || board.get(l.getRow(), l.getCol() + 1) == ' ') temp ++;
-        if (board.get(l.getRow(), l.getCol() - 1) == '#' || board.get(l.getRow(), l.getCol() - 1) == '.' || board.get(l.getRow(), l.getCol() - 1) == ' ') temp ++;
-        return temp;
     }
 
 }
