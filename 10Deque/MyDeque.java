@@ -13,11 +13,10 @@ public class MyDeque{
         String[] temp = new String[data.length * 2];
         int counter = start;
         int place = 0;
-        while (counter != end){
-            temp[place] = data[counter];
+        while ((counter % data.length != end) && place < temp.length){
+            temp[place] = data[counter % data.length];
             counter ++;
             place ++;
-            counter = counter % data.length;
         }
         temp[place] = data[end];
         start = 0;
@@ -35,6 +34,7 @@ public class MyDeque{
             end --;
             end = end % data.length;
         }
+        if (end == -1) end += data.length;
     }
 
     public void addLast(String s){
@@ -62,7 +62,7 @@ public class MyDeque{
         if (size == 0) throw new NoSuchElementException();
         String s = data[end];
         end --;
-        end = end % data.length;
+        if (end == -1) end += data.length;
         size --;
         return s;
     }
@@ -85,6 +85,10 @@ public class MyDeque{
         }
         s += "\n" + "start: " + start + " end: " + end;
         return s;
+    }
+
+    public int size(){
+        return size;
     }
 
 }
